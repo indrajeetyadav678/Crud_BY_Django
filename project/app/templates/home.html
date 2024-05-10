@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+</head>
+<body>
+    <form action="{% url 'insert' %}" method="POST">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Insert" onclick="showmsg()">
+    </form>
+ 
+    
+    <a href="{% url 'display' %}">Show the insert Data</a>
+     
+
+    <script>
+        massage1='{{key1}}'
+
+        function showmsg(){
+            alert(massage1)
+        }
+    </script>
+</body>
+</html>

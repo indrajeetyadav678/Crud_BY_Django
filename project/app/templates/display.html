@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>display</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Name</td>
+                <td>Email</td>
+                <td>Number</td>
+                <td>Position</td>
+                <td>Sallery</td>
+            </tr>
+        </thead>
+    {% if key2 %}
+    <tbody>
+        {% for i in key2 %}
+        <tr>
+           <td> {{i.id}} </td>
+           <td>{{i.Name}}</td>
+           <td>{{i.Email}}</td>
+           <td>{{i.Number}}</td>
+           <td>{{i.Position}}</td>
+           <td>{{i.Sallary}}</td>
+           <td>
+            <form action="{% url 'edit' pk={{i.id}} %}" method="post">
+               {% csrf_token %}
+               <input type="submit" value="edit">
+            </form>
+           </td>
+           <td>
+            <form action="{% url 'delet' pk={{i.id}} %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Delete">
+             </form>
+           </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    {% endif %}
+     </table>
+</body>
+</html>
