@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="display: flex; justify-content: center; align-items: center;">
+ 
+
+     <div style="width: 350px; height: 300px; border: 2px solid black; text-align: center; padding-top: 8px;">
+        <div>Update Form</div><br />
+        <form action="{% url 'update' pk=data.id %}" method="POST">
+            {% csrf_token %}
+            <input type="number" name="Id" value="{{ data.id }}" required style="display: none;" />
+            <input type="text" name="Name" value="{{ data.Name }}" required /><br /><br />
+            <input type="email" name="Email" value="{{data.Email}}" required /><br /><br />
+            <input type="text" name="Number" value="{{ data.Number }}" required /><br /><br />
+            <input type="text" name="Position" value="{{ data.Position }}" required /><br /><br />
+            <input type="text" name="Sallary" value="{{ data.Sallary }}" required /><br /><br />
+            <input type="submit" value="Update" /><br /><br /><br /><br />
+        </form>
+
+    </div>
+</body>
+</html>

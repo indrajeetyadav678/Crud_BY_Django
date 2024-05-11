@@ -14,10 +14,10 @@ def insert(request):
     number=request.POST['Number']
     position=request.POST['Position']
     sallary=request.POST['Sallary']
-    emailmatch=EmplayeeModel.objects.filter(Name=name)
+    emailmatch=EmplayeeModel.objects.filter(Email=email)
     if emailmatch:
         msg="Data already exist"
-        return redirect('/', {'key1':msg})
+        return redirect('/')
     else:
         EmplayeeModel.objects.create(
             Name= name,
@@ -27,7 +27,7 @@ def insert(request):
             Sallary=sallary
             )
         msg="Your Data Inserted Successfully"
-        return redirect('/', {'key1':msg})
+        return redirect('/')
     
 def display(request):
     all_data=EmplayeeModel.objects.all()
@@ -36,9 +36,35 @@ def display(request):
 
 
 def edit(request, pk):
-    data=EmplayeeModel.objects.filter(id=pk)
-    Name=request.POST.get(Name)
-    Email=request.POST.get(Email)
-    Number=request.POST.get(Number)
-    Position=request.POST.get(Position)
-    Sallary=request.POST.get(Sallary)
+    try:
+        Data=EmplayeeModel.objects.get(id=pk)
+    except:
+        print(Data)
+        print(Data.id)
+        print(Data.Sallary)
+        return redirect('display')
+    return render(request, 'updateform.html',{'data':Data})
+
+
+def update(request, pk):
+    employee=EmplayeeModel.objects.get(id=pk)
+    if request.method == 'POST':
+        employee.Name = request.POST.get('Name')
+        employee.Email = request.POST.get('Email')
+        employee.Number = request.POST.get('Number')
+        employee.Position = request.POST.get('Position')
+        employee.Sallary = request.POST.get('Sallary')
+        employee.save()
+        msg = "Data updated successfully"
+        return redirect('display') 
+     # Redirect to display page after updating
+    
+    return render(request, 'updateform.html', {'employee': employee})
+    
+
+def delet(request, pk):
+    EMP_data=EmplayeeModel.objects.get(id=pk)
+    EMP_data.delete()
+    msg="Date deleted "
+    # return render(request,'display.html',{'key3':msg})
+    return redirect('display')

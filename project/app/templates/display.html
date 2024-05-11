@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>display</title>
 </head>
+
 <body>
+    
+
+
     <table>
         <thead>
             <tr>
@@ -14,35 +19,49 @@
                 <td>Email</td>
                 <td>Number</td>
                 <td>Position</td>
-                <td>Sallery</td>
+                <td>Salary</td>
+                <td>Update</td>
+                <td>Delete</td>
             </tr>
         </thead>
-    {% if key2 %}
-    <tbody>
-        {% for i in key2 %}
-        <tr>
-           <td> {{i.id}} </td>
-           <td>{{i.Name}}</td>
-           <td>{{i.Email}}</td>
-           <td>{{i.Number}}</td>
-           <td>{{i.Position}}</td>
-           <td>{{i.Sallary}}</td>
-           <td>
-            <form action="{% url 'edit' pk={{i.id}} %}" method="post">
-               {% csrf_token %}
-               <input type="submit" value="edit">
-            </form>
-           </td>
-           <td>
-            <form action="{% url 'delet' pk={{i.id}} %}" method="post">
-                {% csrf_token %}
-                <input type="submit" value="Delete">
-             </form>
-           </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-    {% endif %}
-     </table>
+        {% if key2 %}
+        <tbody>
+            {% for i in key2 %}
+            <tr>
+                <td> {{i.id}} </td>
+                <td>{{i.Name}}</td>
+                <td>{{i.Email}}</td>
+                <td>{{i.Number}}</td>
+                <td>{{i.Position}}</td>
+                <td>{{i.Sallary}}</td>
+                <td>
+                    <form action="{% url 'edit' pk=i.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="edit">
+                    </form>
+
+                </td>
+                <td>
+                    <form action="{% url 'delet' pk=i.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Delete">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        {% endif %}
+    </table><br /><br /><br /><br />
+    <a href="{% url 'home' %}">Insert data</a>
+
+
+    <script>
+        massage1 = '{{key3}}'
+
+        function showmsg() {
+            alert(massage1)
+        }
+    </script>
 </body>
+
 </html>
